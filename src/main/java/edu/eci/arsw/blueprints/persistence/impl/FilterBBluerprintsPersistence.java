@@ -20,7 +20,7 @@ public class FilterBBluerprintsPersistence extends FilterABlueprintsPersistence{
         super();      
     }
     @Override
-    protected Blueprint filtro(Blueprint b){
+    protected Blueprint filtrar(Blueprint b){
         List<Point> points = b.getPoints();
         Blueprint b2;
         

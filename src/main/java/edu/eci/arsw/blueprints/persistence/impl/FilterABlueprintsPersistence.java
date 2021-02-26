@@ -46,7 +46,7 @@ public class FilterABlueprintsPersistence implements BlueprintsPersistence {
     @Override
     public Blueprint getBlueprint(String author, String bprintname) throws BlueprintNotFoundException {
         
-        Blueprint bp =  filtro(blueprints.get(new Tuple<>(author, bprintname)));
+        Blueprint bp =  filtrar(blueprints.get(new Tuple<>(author, bprintname)));
  
         return bp;
     }
@@ -60,7 +60,7 @@ public class FilterABlueprintsPersistence implements BlueprintsPersistence {
             for(Map.Entry<Tuple<String,String>,Blueprint>  entry :  blueprints.entrySet()){
                 bprintprov=entry.getValue();
                 if(bprintprov.getAuthor()==author){
-                    bPrint.add(filtro(bprintprov));
+                    bPrint.add(filtrar(bprintprov));
                 }
             }
             if (bPrint.isEmpty()){
@@ -76,7 +76,7 @@ public class FilterABlueprintsPersistence implements BlueprintsPersistence {
     public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
         Set<Blueprint> bSprint = new HashSet<>();
         for(Map.Entry<Tuple<String,String>,Blueprint>  entry :  blueprints.entrySet()){
-            bSprint.add(filtro(entry.getValue()));
+            bSprint.add(filtrar(entry.getValue()));
         }
         if (bSprint.isEmpty()){
             throw new BlueprintNotFoundException("There are not any blueprint");
@@ -86,7 +86,7 @@ public class FilterABlueprintsPersistence implements BlueprintsPersistence {
     }
     
     
-    protected Blueprint filtro(Blueprint b){
+    protected Blueprint filtrar(Blueprint b){
         List<Point> points = b.getPoints();
         Blueprint b2;
         

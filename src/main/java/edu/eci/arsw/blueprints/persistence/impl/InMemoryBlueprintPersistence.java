@@ -38,10 +38,10 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         Blueprint bp=new Blueprint("_authorname_", "_bpname_ ",pts);
         blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
         
-        Blueprint bp2=new Blueprint("David", "Hopital",pts);
+        Blueprint bp2=new Blueprint("juan", "Centro Comercial",pts);
         blueprints.put(new Tuple<>(bp2.getAuthor(),bp2.getName()), bp2);
         
-        Blueprint bp3=new Blueprint("David", "Escuela",pts1);
+        Blueprint bp3=new Blueprint("juan", "Escuela",pts1);
         blueprints.put(new Tuple<>(bp3.getAuthor(),bp3.getName()), bp3);
         
         Blueprint bp4=new Blueprint("Leonardo", "Casa",pts2);
@@ -62,8 +62,12 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     }
 
     @Override
-    public Blueprint getBlueprint(String author, String bprintname) throws BlueprintNotFoundException {    
-        return blueprints.get(new Tuple<>(author, bprintname));
+    public Blueprint getBlueprint(String author, String bprintname) throws BlueprintNotFoundException { 
+        Blueprint bp=blueprints.get(new Tuple<>(author, bprintname));
+        if(bp==null){
+            throw new BlueprintNotFoundException("No exist");
+        }
+        return bp;
     }
 
     @Override
@@ -73,7 +77,7 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
             Blueprint bprintprov;
             for(Map.Entry<Tuple<String,String>,Blueprint>  entry :  blueprints.entrySet()){
                 bprintprov=entry.getValue();
-                if(bprintprov.getAuthor()==author){
+                if(bprintprov.getAuthor().equals(author)){
                     bPrint.add(bprintprov);
                 }
             }
